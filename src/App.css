@@ -50,3 +50,12 @@ h6 {
   margin: 0;
   padding: 0;
 }
+
+
+main {
+  margin: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
