@@ -1,5 +1,5 @@
 import { useLocation, Location } from 'react-router-dom';
-import './Header.css';
+import './Header.scss';
 
 interface NavItem {
   name: string;
