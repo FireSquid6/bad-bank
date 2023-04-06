@@ -10,7 +10,7 @@ import CreateAccount from './pages/create-account/CreateAccount'
 
 function App() {
   return (
-    <div className="App">
+    <div className="app">
       <BrowserRouter>
         <Header />
         <Routes>
