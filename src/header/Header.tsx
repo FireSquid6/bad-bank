@@ -30,6 +30,7 @@ export default function Header() {
       <nav>
         {navItems.map((item: NavItem) => (
           <a
+            href={item.path}
             key={item.name}
             className={location === item.path ? 'nav-item active' : 'nav-item'}
             >{item.name}</a>
