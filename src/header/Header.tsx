@@ -8,7 +8,7 @@ interface NavItem {
 
 
 export default function Header() {
-  let location: string = "/create-account"
+  let location: string = "/"
   try {
     location = useLocation().pathname;
   }
@@ -17,6 +17,7 @@ export default function Header() {
   }
 
   const navItems: NavItem[] = [
+    { name: 'Home', path: '/'},
     { name: 'Create Account', path: '/create-account' },
     { name: 'Withdraw', path: '/withdraw' },
     { name: 'Deposit', path: '/deposit' },
