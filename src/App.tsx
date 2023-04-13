@@ -6,6 +6,7 @@ import Header from './header/Header'
 import { BrowserRouter, Routes, Route, useLocation, Location } from 'react-router-dom'
 import Home from './pages/home/Home'
 import CreateAccount from './pages/create-account/CreateAccount'
+import AllAccounts from './pages/all-accounts/AllAccounts'
 
 
 function App() {
@@ -18,7 +19,7 @@ function App() {
           <Route path="/create-account" element={<CreateAccount />} />
           <Route path="/deposit" element={<div>Deposit</div>} />
           <Route path="/withdraw" element={<div>Withdraw</div>} />
-          <Route path="/alldata" element={<div>All Data</div>} />
+          <Route path="/alldata" element={<AllAccounts />} />
         </Routes>
       </BrowserRouter>
     </div>
