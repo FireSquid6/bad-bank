@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route, useLocation, Location } from 'react-route
 import Home from './pages/home/Home'
 import CreateAccount from './pages/create-account/CreateAccount'
 import AllAccounts from './pages/all-accounts/AllAccounts'
+import { Deposit, Withdraw } from './pages/management/Management'
 
 
 function App() {
@@ -17,8 +18,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/create-account" element={<CreateAccount />} />
-          <Route path="/deposit" element={<div>Deposit</div>} />
-          <Route path="/withdraw" element={<div>Withdraw</div>} />
+          <Route path="/deposit" element={<Deposit />} />
+          <Route path="/withdraw" element={<Withdraw />} />
           <Route path="/alldata" element={<AllAccounts />} />
         </Routes>
       </BrowserRouter>
