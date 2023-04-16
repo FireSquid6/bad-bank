@@ -1,6 +1,7 @@
 import { Button, Form, Card } from 'react-bootstrap';
 import './CreateAccount.scss';
 import { FormEvent, ChangeEvent, useState } from 'react';
+import Page from '../pages';
 
 
 enum InvalidCreateAccountReason {
@@ -22,7 +23,7 @@ function ValidateCreateAccountSubmission(username: string, password: string, ema
 
 
 
-export default function CreateAccount() {
+export default function CreateAccount({accounts, setAccounts}: Page) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
@@ -51,8 +52,20 @@ export default function CreateAccount() {
     }
     else {
       console.log("Valid submission")
-      alert("Account Created")
+      
+      let newAccounts: any[] = JSON.parse(localStorage.getItem("accounts") as string)
+      newAccounts.push({
+        username: username,
+        password: password,
+        email: email,
+        balance: 0
+      })
+      
+      localStorage.setItem("accounts", JSON.stringify(newAccounts))
+      setAccounts(newAccounts)
       setCreatingAccount(false)
+      console.log(newAccounts)
+      console.log(accounts)
     }
   }
   

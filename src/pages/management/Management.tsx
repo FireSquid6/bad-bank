@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import { Button, Form, Card } from 'react-bootstrap';
 import './Management.scss';
+import Page from '../pages';
 
-
-interface ManagementPageProps {
+interface ManagementPageProps extends Page{
   type: string;
   operation_multiplier?: number;
 }
-function ManagementPage({ type, operation_multiplier = 1 }: ManagementPageProps) {
+function ManagementPage({ accounts, setAccounts, type, operation_multiplier = 1 }: ManagementPageProps) {
   const [buttonDisabled, setButtonDisabled] = useState(true);
 
   
@@ -42,15 +42,15 @@ function parse_input(input: string): null | number {
 }
 
 
-export function Withdraw() {
+export function Withdraw({ accounts, setAccounts }: Page) {
   return (
-    <ManagementPage type="Withdraw" operation_multiplier={-1} />
+    <ManagementPage accounts={accounts} setAccounts={setAccounts} type="Withdraw" operation_multiplier={-1} />
   )
 }
 
-export function Deposit() {  
+export function Deposit({ accounts, setAccounts }: Page) {  
   return (
-    <ManagementPage type="Deposit"  />
+    <ManagementPage accounts={accounts} setAccounts={setAccounts} type="Deposit"  />
   )
 }
 
