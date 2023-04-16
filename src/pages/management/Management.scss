@@ -1,0 +1,16 @@
+.management-card {
+  color: #fff;
+  background-color: #333;
+}
+
+.management-card input, .management-card select {
+  color: #fff;
+  background-color: #444;
+  border: none;
+}
+
+.management-card input:focus, .management-card select:focus {
+  background-color: #555;
+  color: #fff;
+  border: none;
+}
