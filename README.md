@@ -1,4 +1,5 @@
-# bad-bank
-An exercise I did while studying at MITxPro's online bootcamp
+# Bad Bank
+Bad Bank is a cookie-cutter project showing off a basic three tiered application for my porfolio and for my programming bootcamp.
 
-# TODO
+# Contributing
+PR's will not be accepted, since this is a project I'm doing for my bootcamp.
