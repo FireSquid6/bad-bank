@@ -1,5 +1,5 @@
 import Header from "./header/Header";
-import { Routes, Route, BrowserRouter, useLocation } from "react-router-dom";
+import { Routes, Route, BrowserRouter } from "react-router-dom";
 import Home from "./pages/Home";
 
 export default function App() {
