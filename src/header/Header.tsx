@@ -1,13 +1,11 @@
+import { useLocation } from "react-router-dom";
+
 export interface NavItem {
   label: string;
   path: string;
 }
 
-export interface HeaderProps {
-  path: string;
-}
-
-export default function Header({ path }: HeaderProps) {
+export default function Header() {
   const navItems: NavItem[] = [
     { label: "Home", path: "/" },
     { label: "Create Account", path: "/create-account" },
@@ -15,6 +13,7 @@ export default function Header({ path }: HeaderProps) {
     { label: "Withdraw", path: "/withdraw" },
     { label: "All Data", path: "/all-data" },
   ];
+  const path = useLocation().pathname;
 
   return (
     <header className="flex justify-between items-center text-white py-4 px-6 bg-zinc-950 w-full">

@@ -1,10 +1,16 @@
 import Header from "./header/Header";
+import { Routes, Route, BrowserRouter, useLocation } from "react-router-dom";
+import Home from "./pages/Home";
 
 export default function App() {
   return (
     <main role="main" className="bg-zinc-700 h-screen text-white">
-      <Header path="/" />
-      <h1 className="text-3xl">Hello world!</h1>
+      <BrowserRouter>
+        <Header />
+        <Routes>
+          <Route path="/" element={<Home />} />
+        </Routes>
+      </BrowserRouter>
     </main>
   );
 }
