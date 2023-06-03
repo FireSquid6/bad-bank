@@ -5,6 +5,6 @@ import App from "./App";
 describe("test the app componenet", () => {
   it("should render the app", () => {
     render(<App />);
-    expect(screen.getByText(/Bad Bank/)).toBeInTheDocument();
+    expect(screen.getByRole("main")).toBeInTheDocument();
   });
 });

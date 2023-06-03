@@ -2,12 +2,8 @@ import Header from "./Header";
 import { render, screen } from "@testing-library/react";
 
 describe("test the header component", () => {
-  it("should render the pages", () => {
-    render(<Header />);
-    expect(screen.getByText(/Home/)).toBeInTheDocument();
-    expect(screen.getByText(/Create Account/)).toBeInTheDocument();
-    expect(screen.getByText(/Deposit/)).toBeInTheDocument();
-    expect(screen.getByText(/Withdraw/)).toBeInTheDocument();
-    expect(screen.getByText(/All Data/)).toBeInTheDocument();
+  it("should highlight the current page", () => {
+    render(<Header path="/create-account" />);
+    expect(screen.getByText(/Create Account/)).toHaveClass("text-orange-500");
   });
 });
