@@ -1,16 +1,16 @@
-import { useEffect, useState } from "react";
-import { useSession } from "./session";
+import { useState } from "react";
 import { backendClient } from "./client";
+import { Session } from "@supabase/supabase-js";
 
 export interface Profile {
   id: string;
   balance: number;
 }
-export function useProfile() {
-  const session = useSession();
+export function useProfile(
+  session: Session | null
+): [Profile | null, () => void] {
   const [profile, setProfile] = useState<Profile | null>(null);
-
-  useEffect(() => {
+  const update = () => {
     if (session === null) {
       setProfile(null);
     } else {
@@ -24,7 +24,7 @@ export function useProfile() {
           setProfile(data);
         });
     }
-  }, [session]);
+  };
 
-  return profile;
+  return [profile, update];
 }

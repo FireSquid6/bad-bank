@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { backendClient } from "../backend/client";
 import { useSession } from "../backend/session";
 import { useProfile } from "../backend/profile";
@@ -15,7 +15,11 @@ export default function Operation({
   const [amount, setAmount] = useState(0);
   const [loading, setLoading] = useState(false);
   const session = useSession();
-  const profile = useProfile();
+  const [profile, update] = useProfile(session);
+
+  useEffect(() => {
+    update();
+  }, [update]);
 
   console.log(session);
   if (session === null) {
@@ -54,6 +58,7 @@ export default function Operation({
                 })
                 .then((data) => {
                   setLoading(false);
+                  update();
                   console.log(data);
                 });
             }}
