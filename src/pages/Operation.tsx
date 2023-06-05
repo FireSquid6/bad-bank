@@ -1,4 +1,7 @@
 import { useState } from "react";
+import { backendClient } from "../backend/client";
+import { useSession } from "../backend/session";
+import { useProfile } from "../backend/profile";
 
 export interface OperationProps {
   title: string;
@@ -10,6 +13,14 @@ export default function Operation({
   input_multiplier = 1,
 }: OperationProps) {
   const [amount, setAmount] = useState(0);
+  const [loading, setLoading] = useState(false);
+  const session = useSession();
+  const profile = useProfile();
+
+  console.log(session);
+  if (session === null) {
+    return <p>Please create an account or log in first</p>;
+  }
 
   return (
     <div className="w-full flex align-middle justify-center">
@@ -30,14 +41,27 @@ export default function Operation({
         </div>
         <div className="w-full flex flex-row align-middle justify-center">
           <button
-            className="bg-green-500 text-white w-36 h-12"
-            onSubmit={() => {
-              console.log(amount * input_multiplier);
+            className="bg-green-500 text-white w-36 h-12 disabled:bg-green-600 hover:bg-green-400"
+            disabled={loading}
+            onClick={() => {
+              console.log("submitting");
+              setLoading(true);
+              backendClient
+                .from("profiles")
+                .upsert({
+                  id: session.user.id,
+                  balance: amount * input_multiplier,
+                })
+                .then((data) => {
+                  setLoading(false);
+                  console.log(data);
+                });
             }}
           >
-            Submit
+            {loading ? "Loading..." : "Submit"}
           </button>
         </div>
+        <p>Balance: {profile?.balance || "Loading..."}</p>
       </div>
     </div>
   );
