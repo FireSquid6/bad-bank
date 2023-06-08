@@ -1,7 +1,6 @@
-import { useState, useEffect } from "react";
-import { backendClient } from "../backend/client";
+import { useState } from "react";
 import { useSession } from "../backend/session";
-import { useProfile } from "../backend/profile";
+import { useCurrentProfile, updateProfile } from "../backend/profile";
 
 export interface OperationProps {
   title: string;
@@ -13,15 +12,10 @@ export default function Operation({
   input_multiplier = 1,
 }: OperationProps) {
   const [amount, setAmount] = useState(0);
-  const [loading, setLoading] = useState(false);
+  const [change, setChange] = useState(0);
   const session = useSession();
-  const [profile, update] = useProfile(session);
+  const [profile, loading] = useCurrentProfile();
 
-  useEffect(() => {
-    update();
-  }, [update]);
-
-  console.log(session);
   if (session === null) {
     return <p>Please create an account or log in first</p>;
   }
@@ -40,7 +34,7 @@ export default function Operation({
               const value = e.target.value;
               setAmount(parseInt(value) || 0);
             }}
-            defaultValue={0}
+            value={amount}
           />
         </div>
         <div className="w-full flex flex-row align-middle justify-center">
@@ -49,24 +43,23 @@ export default function Operation({
             disabled={loading}
             onClick={() => {
               console.log("submitting");
-              setLoading(true);
-              backendClient
-                .from("profiles")
-                .upsert({
-                  id: session.user.id,
-                  balance: amount * input_multiplier,
-                })
-                .then((data) => {
-                  setLoading(false);
-                  update();
-                  console.log(data);
-                });
+              if (profile === null) {
+                return;
+              }
+
+              updateProfile({
+                id: profile.id,
+                balance: profile.balance + amount * input_multiplier,
+              });
+
+              setChange(change + amount * input_multiplier);
+              setAmount(0);
             }}
           >
             {loading ? "Loading..." : "Submit"}
           </button>
         </div>
-        <p>Balance: {profile?.balance || "Loading..."}</p>
+        <p>Balance: {(profile?.balance || 0) + change}</p>
       </div>
     </div>
   );
