@@ -11,7 +11,7 @@ export default function App() {
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/create-account" element={<CreateAccount />} />
+          <Route path="/auth" element={<CreateAccount />} />
           <Route
             path="/deposit"
             element={<Operation title="Deposit" input_multiplier={1} />}

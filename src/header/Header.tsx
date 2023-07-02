@@ -8,10 +8,9 @@ export interface NavItem {
 export default function Header() {
   const navItems: NavItem[] = [
     { label: "Home", path: "/" },
-    { label: "Create Account", path: "/create-account" },
+    { label: "Login", path: "/auth" },
     { label: "Deposit", path: "/deposit" },
     { label: "Withdraw", path: "/withdraw" },
-    { label: "All Data", path: "/all-data" },
   ];
   const path = useLocation().pathname;
 
