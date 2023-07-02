@@ -1,18 +1,18 @@
-import { describe, it, expect } from 'vitest';
-import { render } from '@testing-library/react';
-import Header from './Header';
+import Header from "./Header";
+import { describe, afterEach, it, vi } from "vitest";
+import { render, screen } from "@testing-library/react";
 
-describe("Header", () => {
-  const { getByText, getByDisplayValue } = render(<Header />);
-  it("should have working links", () => {
-    // check that the header is rendered
-    expect(getByText("Home")).toBeTruthy();
-    expect(getByText("Create Account")).toBeTruthy();
-    expect(getByText("Withdraw")).toBeTruthy();
-    expect(getByText("Deposit")).toBeTruthy();
-    expect(getByText("All Data")).toBeTruthy();
+vi.mock("react-router-dom", () => ({
+  useLocation: vi.fn().mockReturnValue({ pathname: "/create-account" }),
+}));
+
+describe("test the header component", () => {
+  afterEach(() => {
+    vi.restoreAllMocks();
   });
-  it("should have the active class if the link is active", () => {
-    expect(getByText("Home").className).toContain("active");
+
+  it("should highlight the current page", () => {
+    render(<Header />);
+    expect(screen.getByText(/Create Account/)).toHaveClass("text-orange-500");
   });
 });

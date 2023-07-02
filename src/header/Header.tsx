@@ -1,41 +1,35 @@
-import { useLocation, Location } from 'react-router-dom';
-import './Header.scss';
+import { useLocation } from "react-router-dom";
 
-interface NavItem {
-  name: string;
+export interface NavItem {
+  label: string;
   path: string;
 }
 
-
 export default function Header() {
-  let location: string = "/"
-  try {
-    location = useLocation().pathname;
-  }
-  catch (e) {
-    console.log(e);
-  }
-
   const navItems: NavItem[] = [
-    { name: 'Home', path: '/'},
-    { name: 'Create Account', path: '/create-account' },
-    { name: 'Withdraw', path: '/withdraw' },
-    { name: 'Deposit', path: '/deposit' },
-    { name: 'All Data', path: '/alldata' },
+    { label: "Home", path: "/" },
+    { label: "Login", path: "/auth" },
+    { label: "Deposit", path: "/deposit" },
+    { label: "Withdraw", path: "/withdraw" },
   ];
-  
+  const path = useLocation().pathname;
+
   return (
-    <header className="header">
-      <h1>Bad Bank</h1>
+    <header className="flex justify-between items-center text-white py-4 px-6 bg-zinc-950 w-full">
+      <h1 className="text-xl">Bad Bank</h1>
       <nav>
         {navItems.map((item: NavItem) => (
           <a
+            key={item.path}
             href={item.path}
-            key={item.name}
-            className={location === item.path ? 'nav-item active' : 'nav-item'}
-            >{item.name}</a>
+            className={`mx-2 text-lg ${
+              path === item.path ? "text-orange-500" : ""
+            }`}
+          >
+            {item.label}
+          </a>
         ))}
       </nav>
     </header>
-  )
+  );
 }

@@ -1,43 +1,27 @@
-import { useEffect, useState } from 'react'
-import './App.scss'
-import Header from './header/Header'
-import { BrowserRouter, Routes, Route, useLocation, Location } from 'react-router-dom'
-import Home from './pages/home/Home'
-import CreateAccount from './pages/create-account/CreateAccount'
-import AllAccounts from './pages/all-accounts/AllAccounts'
-import { Deposit, Withdraw } from './pages/management/Management'
-import { Account } from './pages/pages';
+import Header from "./header/Header";
+import { Routes, Route, BrowserRouter } from "react-router-dom";
+import Home from "./pages/Home";
+import CreateAccount from "./pages/CreateAccount";
+import Operation from "./pages/Operation";
 
-
-
-function App() {
-  const [accounts, setAccounts] = useState<Account[]>([])
-  useEffect(() => {
-    // use localstorage to store accounts
-    const accounts = localStorage.getItem("accounts")
-    if (accounts) {
-      setAccounts(JSON.parse(accounts))
-    } else {
-      localStorage.setItem("accounts", JSON.stringify([]))
-    }
-
-    console.log(accounts)
-  }, []);
-
+export default function App() {
   return (
-    <div className="app">
+    <main role="main" className="bg-zinc-900 h-screen text-white">
       <BrowserRouter>
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/create-account" element={<CreateAccount accounts={ accounts } setAccounts={ setAccounts } />} />
-          <Route path="/deposit" element={<Deposit accounts={ accounts } setAccounts={ setAccounts }/>} />
-          <Route path="/withdraw" element={<Withdraw accounts={ accounts } setAccounts={ setAccounts }/>} />
-          <Route path="/alldata" element={<AllAccounts accounts={ accounts } setAccounts={ setAccounts }/>} />
+          <Route path="/auth" element={<CreateAccount />} />
+          <Route
+            path="/deposit"
+            element={<Operation title="Deposit" input_multiplier={1} />}
+          />
+          <Route
+            path="/withdraw"
+            element={<Operation title="Withdraw" input_multiplier={-1} />}
+          />
         </Routes>
       </BrowserRouter>
-    </div>
-  )
+    </main>
+  );
 }
-
-export default App
