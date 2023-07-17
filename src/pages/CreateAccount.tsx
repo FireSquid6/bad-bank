@@ -10,6 +10,7 @@ export default function CreateAccount() {
         <Auth
           supabaseClient={backendClient}
           appearance={{ theme: ThemeSupa }}
+          dark={true}
           providers={["github"]}
         />
       </div>
