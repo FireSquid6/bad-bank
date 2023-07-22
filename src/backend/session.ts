@@ -71,6 +71,7 @@ export class SessionSingleton {
     });
     backendClient.auth.onAuthStateChange((event: AuthChangeEvent, session) => {
       if (event == "SIGNED_IN" && session !== null) {
+        alert("Thank you for signing in!");
         console.log("signed in!");
         updateProfile({
           id: session.user.id,
